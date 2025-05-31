@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, FormEvent } from "react";
+import React, { useState, useEffect, FormEvent, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -23,6 +23,14 @@ interface LoginFormData {
 }
 
 export default function AuthPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <IAuthPage />
+    </Suspense>
+  );
+}
+
+function IAuthPage() {
   const [isSignUp, setIsSignUp] = useState(true);
   const searchParams = useSearchParams();
   const type = searchParams.get("type");
